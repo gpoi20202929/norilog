@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from flask import Flask, render_template, redirect, Markup,escape,request
+from flask import Flask, render_template, redirect, Markup, escape, request
 
 application = Flask(__name__)
 
@@ -58,6 +58,7 @@ def index():
 
     return render_template('index.html', rides=rides)
 
+
 @application.route('/save', methods=['POST'])
 def save():
     """記録用URL"""
@@ -70,16 +71,17 @@ def save():
     # 保存後はトップページにリダイレクトします
     return redirect('/')
 
+
 @application.template_filter('nl2br')
 def nl2br_filter(s):
     """改行文字をbrタグに置き換えるテンプレートフィルター"""
-    return escape(s).replace('\n',Markup('<br>'))
+    return escape(s).replace('\n', Markup('<br>'))
+
 
 def main():
-    application.run('127.0.0.1',8000)
+    application.run('127.0.0.1', 8000)
+
 
 if __name__ == '__main__':
     # IPアドレス0.0.0.0の8000番ポートでアプリケーションを実行します
     application.run('0.0.0.0', 8000, debug=True)
-
-
